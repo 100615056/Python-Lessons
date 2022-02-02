@@ -1,4 +1,4 @@
-# Make sure the user enters a positive number
+# Challenge: Make sure the user enters a positive number
 
 # Do-While Loop (Induce a infinite loop)
 # In order to exit the loop, break statement
