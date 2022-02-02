@@ -1,8 +1,9 @@
-# Break statement
-
-# Exit when reached the letter
-for val in "python":
-  if val == "t":
-    break 
-  print(val) 
-print("Done") 
+# Break and continue statement
+# Break and continue
+sentence = ["Mandarin", "is", "great","!"]
+for word in sentence:
+  if word == "is":
+    continue
+  if word == "!":
+    break
+  print(word)
