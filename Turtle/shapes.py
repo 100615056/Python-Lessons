@@ -1,6 +1,6 @@
 # Drawing shapes with the turtle library
 
-import turle
+import turtle
 
 # Create window and turtle
 w = turtle.getscreen()
