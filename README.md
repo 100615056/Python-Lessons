@@ -1,4 +1,4 @@
-# Private-Class - Python lesson plans
+# Python lesson plans
 
 ### Pyramid
 - Lessons teaching students how to create a double half-pyramid using hashes (#) where the user decides the height by entering a number between 1 and 8, inclusive.
