@@ -18,7 +18,7 @@ def print_pyramid(number):
     print()
 
 def main():
-  number = positive_number()
+  number = pyramid_height()
   print_pyramid(number)
 
 main()
