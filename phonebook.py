@@ -67,7 +67,6 @@ def update_contact():
 
 
 def delete_contact():
-
     # Remove contact entry
     print('Delete Contact...')
     name = input('Enter name: ')
@@ -80,7 +79,6 @@ def delete_contact():
 
 
 def main():
-    count = 0
     while True:
         # Display menu and ask for selection
         display_menu()
