@@ -82,7 +82,12 @@ def main():
     while True:
         # Display menu and ask for selection
         display_menu()
-        choice = int(input('Choose an option: '))
+        option = input('Choose an option: ')
+        # Check for valid entry
+        if option.isnumeric():
+            choice = int(option)
+        else:
+            continue
         # Menu choices
         if choice == 1:
             name, number = contact_information()
