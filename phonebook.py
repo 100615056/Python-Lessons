@@ -19,7 +19,9 @@ def contact_information():
     print('------------------------')
     print('Creating Contact - Please Enter information')
     while True:
-        name = input('Enter Name: ')
+        check = input('Name: ')
+        # Return the name as a lowercase
+        name = check.lower()
         number = input('Enter Number: ')
         if name and number:
             print('Contact made')
@@ -38,7 +40,7 @@ def display_phonebook():
 
     for name, number in sorted(PHONEBOOK.items()):
         print()
-        print(f'Name: {name}')
+        print(f'Name: {name.title()}')
         print(f'Number: {number}')
         print('------------------------')
 
@@ -46,7 +48,10 @@ def display_phonebook():
 def search_contact():
     # Search for contacts in dictionary
     print('Searching Contacts...')
-    name = input('Enter contact name: ')
+    # Look up contact by name
+    check = input('Enter contact name: ')
+    # Convert contact name to lowercase
+    name = check.lower()
     if name in PHONEBOOK:
         print(f'Number: {PHONEBOOK[name]}')
     else:
@@ -56,7 +61,8 @@ def search_contact():
 def update_contact():
     # Update contact information
     print('Update Contact...')
-    name = input('Enter name: ')
+    check = input('Enter contact name: ')
+    name = check.lower()
     if name in PHONEBOOK:
         number = input('Enter new number: ')
         PHONEBOOK[name] = number
@@ -69,7 +75,8 @@ def update_contact():
 def delete_contact():
     # Remove contact entry
     print('Delete Contact...')
-    name = input('Enter name: ')
+    check = input('Enter contact name: ')
+    name = check.lower()
     if name in PHONEBOOK:
         PHONEBOOK.pop(name)
         print('Contact Removed')
