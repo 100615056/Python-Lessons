@@ -25,7 +25,7 @@ def pen(size, pencolor, fillcolor, speed):
     t.fillcolor(fillcolor)
     t.speed(speed)
 
-# TODO: Have user pick shape and then run corresponding shape
+# Display shape menu 
 def shape_input():
     list = ['square', 'zigzag', 'spiral', 'triangle', 'polygon', 'custom']
     for i, item in enumerate(list):
