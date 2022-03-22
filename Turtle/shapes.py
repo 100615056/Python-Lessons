@@ -74,8 +74,7 @@ def spiral(x, y, size, angle):
     start(x, y)
     length = 2 * size
     for i in range(14):  # 0-13
-        t.fd(length)
-        t.right(angle)
+        fwdR(length, angle)
         length += 10
 
 
