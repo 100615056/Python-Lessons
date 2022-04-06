@@ -1,5 +1,4 @@
 # Drawing shapes with the turtle library
-
 import turtle
 
 # Create window and turtle
@@ -25,19 +24,36 @@ def pen(size, pencolor, fillcolor, speed):
     t.fillcolor(fillcolor)
     t.speed(speed)
 
-# Display shape menu 
-def shape_input():
-    list = ['square', 'zigzag', 'spiral', 'triangle', 'polygon', 'custom']
-    for i, item in enumerate(list):
-        print(i, item)
-    shape = int(input('Please enter a number: '))
-    print(shape)
-
+# Shape Menu
+def print_menu():
+    shapes = ['square', 'zigzag', 'spiral', 'triangle', 'polygon', 'clear', 'exit']
+    print('----------')
+    for i, item in enumerate(shapes):
+        print(i+1, item)
+    print('----------')
+    
+    
 # Initial setup for drawing shapes
-def start(x, y):
-    t.setposition(x, y)
-    t.pd()
+def setup():
+    while True:
+        cx = input('X-Coordinate: ')
+        if not cx.isnumeric():
+            print('Enter valid x-coordinate')
+            continue
+        cy = input('Y-Coordinate: ')
+        if not cy.isnumeric():
+            print('Enter valid y-coordinate')
+            continue
+        else:
+            x = int(cx)
+            y = int(cy)
+            t.penup()
+            t.setposition(x, y)
+            t.setheading(0)
+            t.pd()
+            break
 
+            
 # Create functions for common turtle drawing motions
 def fwdR(distance, angle):
     t.fd(distance)
@@ -48,19 +64,18 @@ def fwdL(distance, angle):
     t.fd(distance)
     t.left(angle)
 
-# Draw square shape
-def square(x, y, size, angle):
-    start(x, y)
+    
+def square(size, angle):
+    setup()
     t.right(angle)
     t.begin_fill()
     for i in range(4): 
         fwdR(size, angle)
-    t.left(angle)
     t.end_fill()
 
-# Draw zigzag shape
-def zigzag(x, y, size, angle):
-    start(x, y)
+    
+def zigzag(size, angle):
+    setup()
     t.begin_fill()
     for i in range(4):
         fwdR(size, angle)
@@ -70,25 +85,36 @@ def zigzag(x, y, size, angle):
     t.end_fill()
 
 
-def spiral(x, y, size, angle):
-    start(x, y)
+def spiral(size, angle):
+    setup()
     length = 2 * size
-    for i in range(14):  # 0-13
+    for i in range(14): 
         fwdR(length, angle)
         length += 10
 
 
-def triangle(x, y, side, angle):
-    start(x, y)
+def triangle(side, angle):
+    setup()
     t.begin_fill()
     for i in range(2):
         fwdL(side, angle)
     t.fd(side)
     t.end_fill()
 
-
-def polygon(x, y, sides, length, angle):
-    start(x, y)
+# User-defined polygon
+def polygon_input():
+    while True:
+        size = input('Enter side number (3-15): ')
+        if size.isnumeric():
+            side = int(size)
+            if side > 3 and side < 15:
+                return side
+            else:
+                print('Invalid side number')
+     
+    
+def polygon(sides, length, angle):
+    setup()
     t.begin_fill()
     for i in range(sides):
         fwdR(length, angle)
@@ -102,37 +128,46 @@ def main():
     # Turtle
     shape = "turtle"
     # Pen
-    pen_color = "blue"
-    fill_color = "orange"
+    pen_color = "black"
+    fill_color = "green"
     # Setting Up
     screen(screen_color, text)
     turtle(shape)
     pen(5, pen_color, fill_color, 5)
     # Turtle Drawing
     # Square
-    x = 0
-    y = 0
     square_distance = 100
-    square_angle = 90
-    # square(x, y, square_distance, square_angle)
+    angle_90 = 90
     # ZigZag
     zigzag_distance = 25
     zigzag_angle = 45
-    # zigzag(x, y, zigzag_distance, zigzag_angle)
     # Spiral
     spiral_distance = 10
-    # spiral(x, y, spiral_distance, square_angle)
     # Triangle
     side = 100
     angle = 120
-    # triangle(x, y, side, angle)
     # Polygon
-    sides = 15
-    length = 50
-    polygon_angle = 360 / sides
-    # polygon(x, y, sides, length, polygon_angle)
-    shape_input()
+    length = 30
+    # Draw Selection
+    while True:
+        print_menu()
+        choice = int(input("Select menu item: "))
+        if choice == 1:
+            square(square_distance,angle_90)
+        if choice == 2:
+            zigzag(zigzag_distance, zigzag_angle)
+        if choice == 3:
+            spiral(spiral_distance, angle_90)
+        if choice == 4:
+            triangle(side, angle)
+        if choice == 5:
+            sides = polygon_input()
+            polygon_angle = 360 / sides
+            polygon(sides, length, polygon_angle)
+        if choice == 6:
+            t.clear()
+        if choice == 7:
+            break
 
-
+            
 main()
-
