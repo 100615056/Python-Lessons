@@ -32,6 +32,7 @@
 ### Password Generator
 
 - Create a password generator that outputs the encrpyted passwords into a text file.
+
 Features Include:
 - Password property customization
 - Multiple Passwords
