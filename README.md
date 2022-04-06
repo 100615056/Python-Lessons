@@ -28,3 +28,13 @@
    4. Update a contact
    5. Delete a contact
    6. Exit the menu
+
+### Password Generator
+
+- Create a password generator that outputs the encrpyted passwords into a text file.
+Features Include
+- Password property customization
+- Multiple Passwords
+- Randomized characters and order
+- Encrypted Storage
+
