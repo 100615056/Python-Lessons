@@ -2,8 +2,10 @@
 from random import choice, sample
 import string
 
+# Cryptography
 import cryptography
 import cryptocode
+from cryptography.fernet import Fernet
 
 
 def password_rules():
@@ -80,44 +82,11 @@ def get_password(requirements):
     return password_list
 
 
-def store_passwords(passwords):
-    # Store paswords in a text file
-    with open('pass.txt', 'w') as f:
-        # Add a newline after each element
-        f.write('\n'.join(passwords))
-
 def cryptography_options():
     cryptography = ['Cryptocode', 'Cryptography Package', 'RSA Algorithm']
     for i, type in enumerate(cryptography):
         print(i+1, type)
 
-# Cryptocode 
-def encrypt_cryptocode(message, key):
-    encrypt_message = cryptocode.encrypt(message, key)
-    return encrypt_message
-
-def decrypt_cryptocode(message, key):
-    decrypt_message = cryptocode.decrypt(message, key)
-    if decrypt_message == False:
-        print('Incorrect Key')
-        return False
-    return decrypt_message 
-
-def apply_encryption(passwords):
-    encrypt_message = []
-    key = input('Please enter cipher key: ')
-    for entry in passwords:
-        encrypt = encrypt_cryptocode(entry, key)
-        encrypt_message.append(encrypt)
-    return encrypt_message
-
-def apply_decryption(encryption):
-    decrypt_message = []
-    key = input('Please enter cipher key: ')
-    for entry in encryption:
-        decrypt = decrypt_cryptocode(entry, key)
-        decrypt_message.append(decrypt)
-    return decrypt_message
 
 def menu_selection():
     while True:
@@ -129,17 +98,62 @@ def menu_selection():
                 return choice
         else:
             continue
+
+
+# Cryptocode 
+def encrypt_cryptocode(message, key):
+    encrypt_message = cryptocode.encrypt(message, key)
+    return encrypt_message
+
+def decrypt_cryptocode(message, key):
+    decrypt_message = cryptocode.decrypt(message, key)
+    return decrypt_message 
+
+def apply_cryptocode_encrypt(passwords):
+    encrypt_message = []
+    key = input('Please enter cipher key: ')
+    for entry in passwords:
+        encrypt = encrypt_cryptocode(entry, key)
+        encrypt_message.append(encrypt)
+    return encrypt_message
+
+def apply_cryptocode_decrypt(encryption):
+    decrypt_message = []
+    key = input('Please enter cipher key: ')
+    for entry in encryption:
+        decrypt = decrypt_cryptocode(entry, key)
+        decrypt_message.append(decrypt)
+    return decrypt_message
+
+
+def store_encryption(encryption):
+    # Store encryption in a text file
+    with open('encrypt.txt', 'w') as f:
+        # Add a newline after each element
+        f.write('\n'.join(encryption))
+
+
+def store_passwords(passwords):
+    # Store passwords in a text file
+    with open('pass.txt', 'w') as f:
+        # Add a newline after each element
+        f.write('\n'.join(passwords))
+
+
 def main():
     # Store password requirements
     requirements = []
     passwords = []
     selection = menu_selection()
-    # requirements = password_rules()
-    # passwords = get_password(requirements)
+    requirements = password_rules()
+    passwords = get_password(requirements)
     if selection == 1:
-        encryption = apply_encryption(passwords)
-        result = apply_decryption(encryption)
+        encryption = apply_cryptocode_encrypt(passwords)
+        result = apply_cryptocode_decrypt(encryption)
+        if not any(result):
+            print('Incorrect Key')
     if selection == 2:
-        print('2')
+        print('')
+
 
 main()
