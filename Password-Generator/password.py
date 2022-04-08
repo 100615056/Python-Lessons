@@ -12,43 +12,32 @@ def password_rules():
     # Ask for password requirements 
     while True:
         number = input('Provide number of passwords (positive integer): ')
-        if not number.isnumeric():
-            print('Enter valid number')
-            continue
-
+        if number.isnumeric():
+            number = int(number)
         length = input('Provide password length (positive integer): ')
-        if not length.isnumeric():
-            print('Enter valid length')
-            continue
+        if length.isnumeric():
+            length = int(length)
 
         lower = input('Provide minimum number of lowercase letters (positive integer): ')
-        if not lower.isnumeric():
-            print('Enter valid number for lowercase')
-            continue
+        if lower.isnumeric():
+            lower = int(lower)
 
         upper = input('Provide minimum number of uppercase letters (positive integer): ')
-        if not upper.isnumeric():
-            print('Enter valid number for uppercase')
-            continue
+        if upper.isnumeric():
+            upper = int(upper)
 
         digit = input('Provide minimum number of digits (positive integer): ')
-        if not digit.isnumeric():
-            print('Enter valid number for digits')
-            continue
+        if digit.isnumeric():
+            digit = int(digit)
 
         special = input('Provide minimum number of special characters (positive integer): ') 
-        if not special.isnumeric():
-            print('Enter valid number for special characters')
-            continue
-            
-        else:
-            number = int(number)
-            length = int(length)
-            lower = int(lower)
-            upper = int(upper)
-            digit = int(digit)
+        if special.isnumeric():
             special = int(special)
-            return number, length, lower, upper, digit, special
+
+        else:
+            continue
+
+        return number, length, lower, upper, digit, special
 
 def get_password(requirements):
     number = requirements[0]
@@ -170,6 +159,7 @@ def main():
     selection = menu_selection()
     requirements = password_rules()
     passwords = get_password(requirements)
+    print(passwords)
     if selection == 1:
         encryption = apply_cryptocode_encrypt(passwords)
         result = apply_cryptocode_decrypt(encryption)
