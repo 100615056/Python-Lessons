@@ -125,6 +125,29 @@ def apply_cryptocode_decrypt(encryption):
         decrypt_message.append(decrypt)
     return decrypt_message
 
+# Cryptography Package (Fernet)
+
+def encrypt_fernet(message, fernet):
+    encrypt = fernet.encrypt(message.encode())
+    return encrypt
+
+def decrypt_fernet(message, fernet):
+    decrypt = fernet.decrypt(message).decode()
+    return decrypt
+
+def apply_fernet_encrypt(passwords, fernet):
+    encrypt_message = []
+    for entry in passwords:
+        encrypt = encrypt_fernet(entry, fernet)
+        encrypt_message.append(encrypt)
+    return encrypt_message
+
+def apply_fernet_decrypt(encryption, fernet):
+    decrypt_message = []
+    for entry in encryption:
+        decrypt = decrypt_fernet(entry, fernet)
+        decrypt_message.append(decrypt)
+    return decrypt_message
 
 def store_encryption(encryption):
     # Store encryption in a text file
@@ -153,7 +176,11 @@ def main():
         if not any(result):
             print('Incorrect Key')
     if selection == 2:
-        print('')
+        key = Fernet.generate_key()
+        fernet = Fernet(key)
+        encryption = apply_fernet_encrypt(passwords, fernet)
+        result = apply_fernet_decrypt(encryption, fernet)
+
 
 
 main()
