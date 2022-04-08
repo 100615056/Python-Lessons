@@ -14,6 +14,7 @@ def password_rules():
         number = input('Provide number of passwords (positive integer): ')
         if number.isnumeric():
             number = int(number)
+
         length = input('Provide password length (positive integer): ')
         if length.isnumeric():
             length = int(length)
@@ -159,7 +160,6 @@ def main():
     selection = menu_selection()
     requirements = password_rules()
     passwords = get_password(requirements)
-    print(passwords)
     if selection == 1:
         encryption = apply_cryptocode_encrypt(passwords)
         result = apply_cryptocode_decrypt(encryption)
