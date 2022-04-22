@@ -9,37 +9,44 @@ from cryptography.fernet import Fernet
 
 
 def password_rules():
-    # Ask for password requirements 
+     # Ask for password requirements 
     while True:
         number = input('Provide number of passwords (positive integer): ')
-        if number.isnumeric():
-            number = int(number)
-
-        length = input('Provide password length (positive integer): ')
-        if length.isnumeric():
-            length = int(length)
-
-        lower = input('Provide minimum number of lowercase letters (positive integer): ')
-        if lower.isnumeric():
-            lower = int(lower)
-
-        upper = input('Provide minimum number of uppercase letters (positive integer): ')
-        if upper.isnumeric():
-            upper = int(upper)
-
-        digit = input('Provide minimum number of digits (positive integer): ')
-        if digit.isnumeric():
-            digit = int(digit)
-
-        special = input('Provide minimum number of special characters (positive integer): ') 
-        if special.isnumeric():
-            special = int(special)
-
-        else:
+        if not number.isnumeric():
             continue
 
-        return number, length, lower, upper, digit, special
+        length = input('Provide password length (positive integer): ')
+        if not length.isnumeric():
+            continue
 
+        lower = input('Provide minimum number of lowercase letters (positive integer): ')
+        if not lower.isnumeric():
+            continue
+
+        upper = input('Provide minimum number of uppercase letters (positive integer): ')
+        if not upper.isnumeric():
+            continue
+
+
+        digit = input('Provide minimum number of digits (positive integer): ')
+        if not digit.isnumeric():
+            continue
+
+
+        special = input('Provide minimum number of special characters (positive integer): ') 
+        if not special.isnumeric():
+            continue
+
+        else:
+            number = int(number)
+            length = int(length)
+            lower = int(lower)
+            upper = int(upper)
+            digit = int(digit)
+            special = int(special)
+            return number, length, lower, upper, digit, special
+        
+        
 def get_password(requirements):
     number = requirements[0]
     length = requirements[1]
