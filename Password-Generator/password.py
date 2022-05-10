@@ -4,12 +4,13 @@ import string
 
 # Cryptography
 import cryptography
-import cryptocode
+from cryptocode import encrypt, decrypt
 from cryptography.fernet import Fernet
+import rsa
 
 
 def password_rules():
-     # Ask for password requirements 
+    # Ask for password requirements 
     while True:
         number = input('Provide number of passwords (positive integer): ')
         if not number.isnumeric():
@@ -32,7 +33,6 @@ def password_rules():
         if not digit.isnumeric():
             continue
 
-
         special = input('Provide minimum number of special characters (positive integer): ') 
         if not special.isnumeric():
             continue
@@ -45,8 +45,7 @@ def password_rules():
             digit = int(digit)
             special = int(special)
             return number, length, lower, upper, digit, special
-        
-        
+
 def get_password(requirements):
     number = requirements[0]
     length = requirements[1]
@@ -99,11 +98,11 @@ def menu_selection():
 
 # Cryptocode 
 def encrypt_cryptocode(message, key):
-    encrypt_message = cryptocode.encrypt(message, key)
+    encrypt_message = encrypt(message, key)
     return encrypt_message
 
 def decrypt_cryptocode(message, key):
-    decrypt_message = cryptocode.decrypt(message, key)
+    decrypt_message = decrypt(message, key)
     return decrypt_message 
 
 def apply_cryptocode_encrypt(passwords):
@@ -123,7 +122,6 @@ def apply_cryptocode_decrypt(encryption):
     return decrypt_message
 
 # Cryptography Package (Fernet)
-
 def encrypt_fernet(message, fernet):
     encrypt = fernet.encrypt(message.encode())
     return encrypt
@@ -143,6 +141,29 @@ def apply_fernet_decrypt(encryption, fernet):
     decrypt_message = []
     for entry in encryption:
         decrypt = decrypt_fernet(entry, fernet)
+        decrypt_message.append(decrypt)
+    return decrypt_message
+
+# RSA Algorithm
+def encrypt_rsa(message, publickey):
+    encrypt = rsa.encrypt(message.encode(), publickey)
+    return encrypt
+
+def decrypt_rsa(message, privatekey):
+    decrypt = rsa.decrypt(message, privatekey).decode()
+    return decrypt
+
+def apply_rsa_encrypt(passwords, publickey):
+    encrypt_message = []
+    for entry in passwords:
+        encrypt = encrypt_rsa(entry, publickey)
+        encrypt_message.append(encrypt)
+    return encrypt_message
+
+def apply_rsa_decrypt(encryption, privatekey):
+    decrypt_message = []
+    for entry in encryption:
+        decrypt = decrypt_rsa(entry, privatekey)
         decrypt_message.append(decrypt)
     return decrypt_message
 
@@ -166,6 +187,7 @@ def main():
     passwords = []
     selection = menu_selection()
     requirements = password_rules()
+    print(requirements)
     passwords = get_password(requirements)
     if selection == 1:
         encryption = apply_cryptocode_encrypt(passwords)
@@ -177,7 +199,10 @@ def main():
         fernet = Fernet(key)
         encryption = apply_fernet_encrypt(passwords, fernet)
         result = apply_fernet_decrypt(encryption, fernet)
-
+    if selection == 3:
+        publickey, privatekey = rsa.newkeys(512)
+        encryption = apply_rsa_encrypt(passwords, publickey)
+        result = apply_rsa_decrypt(encryption, privatekey)
 
 
 main()
