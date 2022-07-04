@@ -31,10 +31,11 @@
 
 ### Password Generator
 
-- Create a password generator that encrypts the passwords generated.
+- Create a password generator that encrpyts the passwords and can output this information into a text file.
 
 #### Features Include:
 - Password property customization
 - Multiple Passwords
 - Randomized characters and order
 - Encrypted Storage
+- Output to text file
