@@ -1,6 +1,6 @@
 import string
 
-# Displaying output for string methods
+# Displaying output for string constants
 lower = string.ascii_lowercase
 upper = string.ascii_uppercase
 special = string.punctuation
